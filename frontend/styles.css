@@ -1,0 +1,240 @@
+:root {
+  --bg: #0b0f19;
+  --surface: #111827;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --crit: #ef4444;
+  --high: #f97316;
+  --med: #eab308;
+  --low: #3b82f6;
+  --safe: #10b981;
+  --radius: 1rem;
+}
+html.light {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --border: rgba(15, 23, 42, 0.1);
+  --text: #0f172a;
+  --muted: #475569;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  transition: background 180ms ease, color 180ms ease;
+}
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+}
+.skip-link:focus {
+  left: 8px;
+  top: 8px;
+  z-index: 50;
+  background: #6366f1;
+  color: white;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.4rem;
+}
+.nav-glass {
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  backdrop-filter: blur(16px);
+}
+.tab-btn {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 180ms ease;
+}
+.tab-btn.is-active,
+.tab-btn:focus-visible {
+  color: var(--text);
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  outline: none;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 40px rgba(99, 102, 241, 0.08);
+}
+.card-inner {
+  background: color-mix(in srgb, var(--surface) 80%, #000);
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+}
+.field,
+.btn-secondary,
+.btn-primary,
+.icon-btn {
+  border-radius: 0.7rem;
+  border: 1px solid var(--border);
+  padding: 0.45rem 0.75rem;
+  font-size: 0.85rem;
+  transition: 180ms ease;
+}
+.field {
+  background: var(--bg);
+  color: var(--text);
+}
+.btn-secondary,
+.icon-btn {
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.btn-secondary:hover,
+.icon-btn:hover,
+.btn-secondary:focus-visible,
+.icon-btn:focus-visible,
+.field:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+}
+.btn-primary {
+  border: 0;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  background-image: linear-gradient(90deg, #6366f1, #8b5cf6);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+}
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+.status-chip {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+.status-chip.green { color: var(--safe); box-shadow: 0 0 12px rgba(16, 185, 129, 0.25); }
+.status-chip.amber { color: #fbbf24; }
+.editor-frame {
+  height: 600px;
+  min-height: 280px;
+  resize: vertical;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+}
+.empty-state { text-align: center; padding: 3rem 1rem; color: var(--muted); }
+.skel {
+  background: linear-gradient(90deg, #1f2937, #374151, #1f2937);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 0.75rem;
+}
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+.issue-card {
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  padding: 0.75rem 0.9rem;
+  cursor: pointer;
+  transition: 180ms ease;
+}
+.issue-card:hover { border-color: rgba(139, 92, 246, 0.5); }
+.badge { font-size: 0.68rem; padding: 0.1rem 0.4rem; border-radius: 999px; font-weight: 600; }
+.badge.critical { background: rgba(239, 68, 68, 0.15); color: var(--crit); }
+.badge.high { background: rgba(249, 115, 22, 0.15); color: var(--high); }
+.badge.medium { background: rgba(234, 179, 8, 0.15); color: var(--med); }
+.badge.low { background: rgba(59, 130, 246, 0.15); color: var(--low); }
+.gauge-track { stroke: #1f2937; }
+.gauge-arc {
+  stroke: url(#none);
+  stroke-linecap: round;
+  stroke-dasharray: 157;
+  stroke-dashoffset: 157;
+  transition: stroke-dashoffset 240ms ease, stroke 240ms ease;
+}
+.confidence {
+  height: 6px;
+  background: #1f2937;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.confidence > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+}
+.diff { font-family: "JetBrains Mono", monospace; font-size: 0.75rem; }
+.diff .del { background: rgba(239, 68, 68, 0.15); color: #fca5a5; }
+.diff .add { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; }
+.toast-wrap {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 50;
+}
+.toast {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  padding: 0.6rem 0.8rem;
+  min-width: 220px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+.honesty {
+  border: 1px solid rgba(234, 179, 8, 0.35);
+  background: rgba(234, 179, 8, 0.08);
+  border-radius: 0.85rem;
+  padding: 0.75rem 1rem;
+}
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.flow-node {
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  padding: 0.45rem 0.7rem;
+  background: color-mix(in srgb, #6366f1 15%, var(--surface));
+}
+.kpi {
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  padding: 0.9rem;
+  background: var(--surface);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+.squiggly-crit { text-decoration: underline wavy #ef4444; background: rgba(239, 68, 68, 0.08); }
+.squiggly-high { text-decoration: underline wavy #f97316; background: rgba(249, 115, 22, 0.08); }
+.squiggly-med { text-decoration: underline wavy #eab308; }
+.ml-token { background: rgba(139, 92, 246, 0.25); border-radius: 2px; }
+.glyph-bug { background: #ef4444; border-radius: 99px; }
+.flash-line { background: rgba(99, 102, 241, 0.25) !important; }
+
+@media (max-width: 640px) {
+  .editor-frame { height: 360px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+@media print {
+  body { background: white; color: black; }
+  header, .btn-primary, .btn-secondary, #theme-toggle, nav, #editor { display: none !important; }
+  .card { box-shadow: none; border-color: #ddd; }
+}
